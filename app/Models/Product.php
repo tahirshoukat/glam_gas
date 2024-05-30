@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Complaint extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,8 @@ class Complaint extends Model
         'contact2',
         'address',
         'product_category',
-        'complaint_details',
+        'barcode',
+        'product_details',
         'status'
     ];
 }
