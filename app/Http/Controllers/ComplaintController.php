@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class ComplaintController extends Controller
 {
     public function index(){
-        return view('complaints.index');
+        $complaints =  Complaint::all();
+        return view('complaints.index', compact('complaints'));
     }
 }

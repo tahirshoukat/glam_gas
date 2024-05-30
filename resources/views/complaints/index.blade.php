@@ -21,22 +21,22 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                {{-- @foreach ($complaints as $complaint)
+                                @foreach ($complaints as $complaint)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $complaint->customer_name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $complaint->contact1 }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $complaint->product_category }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $complaint->status }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ route('complaints.edit', $complaint->id) }}" class="btn btn-warning">Edit</a>
+                                            {{-- <a href="{{ route('complaints.edit', $complaint->id) }}" class="btn btn-warning">Edit</a>
                                             <form action="{{ route('complaints.destroy', $complaint->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
