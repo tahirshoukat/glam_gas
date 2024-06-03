@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +31,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('complaints', [ComplaintController::class, 'index'])->name('complaints');
+    Route::get('complaints/{id}', [ComplaintController::class, 'details'])->name('complaints.view');
+
     Route::get('products', [ProductController::class, 'index'])->name('products');
+
+    Route::get('items', [ItemController::class, 'index'])->name('items');
 });
 
 require __DIR__.'/auth.php';

@@ -11,4 +11,10 @@ class ComplaintController extends Controller
         $complaints =  Complaint::all();
         return view('complaints.index', compact('complaints'));
     }
+
+    public function details($id)
+    {
+        $complaint = Complaint::findOrFail($id);
+        return view('complaints.view', compact('complaint'));
+    }
 }
