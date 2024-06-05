@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('salaries', function (Blueprint $table) {
+        Schema::create('technicians', function (Blueprint $table) {
             $table->id();
-            $table->integer('technician_id');
-            $table->integer('base_salary');
-            $table->integer('food_allowance');
-            $table->integer('attendance_allowance');
-            $table->integer('total_salary');
+            $table->string('name');
+            $table->string('contact_no');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salaries');
+        Schema::dropIfExists('technicians');
     }
 };

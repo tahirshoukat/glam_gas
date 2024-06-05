@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <!-- Search Form -->
-                    <form method="GET" action="{{ route('items') }}" class="mb-4 flex">
+                    <form method="GET" action="{{ route('inventories') }}" class="mb-4 flex">
                         <input type="text" name="search" value="{{ $search }}" class="border rounded-l-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Search items...">
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">Search</button>
                     </form>

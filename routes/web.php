@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +36,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('products', [ProductController::class, 'index'])->name('products');
 
-    Route::get('items', [ItemController::class, 'index'])->name('items');
+    Route::get('inventories', [ItemController::class, 'index'])->name('inventories');
+
+    Route::get('technicians', [TechnicianController::class, 'index'])->name('technicians');
 });
 
 require __DIR__.'/auth.php';
