@@ -21,10 +21,19 @@
                         {{ __('Complaints') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('inventories')" :active="request()->routeIs('items')">
+                <!-- Inventories Dropdown -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex relative" x-data="{ open: false }">
+                    <x-nav-link @click="open = !open" :active="request()->routeIs('inventories*')">
                         {{ __('Inventories') }}
                     </x-nav-link>
+                    <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                        <x-dropdown-link :href="route('inventories')" :active="request()->routeIs('inventories')">
+                            {{ __('All Inventories') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('inventories.allocations')" :active="request()->routeIs('inventories.allocations')">
+                            {{ __('Inventory Allocations') }}
+                        </x-dropdown-link>
+                    </div>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('technicians')" :active="request()->routeIs('technicians')">
@@ -84,6 +93,18 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('complaints')" :active="request()->routeIs('complaints')">
+                {{ __('Complaints') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('inventories')" :active="request()->routeIs('inventories')">
+                {{ __('Inventories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('inventories')" :active="request()->routeIs('inventories')">
+                {{ __('Inventory Allocations') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('technicians')" :active="request()->routeIs('technicians')">
+                {{ __('Technicians') }}
             </x-responsive-nav-link>
         </div>
 

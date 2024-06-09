@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Item;
+use App\Models\Inventory;
 
-class ItemController extends Controller
+class InventoryController extends Controller
 {
     public function index(Request $request){
         $search = $request->input('search', '');
 
-        $query = Item::query();
+        $query = Inventory::query();
 
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%')
@@ -18,8 +18,8 @@ class ItemController extends Controller
                 ->orWhere('item_description', 'like', '%' . $search . '%');
         }
 
-        $items = $query->paginate(10); // Adjust the number as needed
+        $inventories = $query->paginate(10); // Adjust the number as needed
 
-        return view('items.index', compact('items', 'search'));
+        return view('inventories.index', compact('inventories', 'search'));
     }
 }
