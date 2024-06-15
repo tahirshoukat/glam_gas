@@ -6,15 +6,6 @@
     </x-slot>
 
     <div class="py-12">
-        <!-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div> -->
-        
-        <!-- Commission Chart Section -->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -25,6 +16,19 @@
         </div>
     </div>
 
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-4">Complaints and Associated Inventories</h3>
+                    <canvas id="complaintsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const commissionData = @json($commissionData);
@@ -45,7 +49,7 @@
                     label: `Technician ${technicianId}`,
                     data: labels.map(date => commissionData[technicianId][date] || 0),
                     fill: false,
-                    borderColor: getRandomColor(), // Generate random color
+                    borderColor: getRandomColor(),
                     tension: 0.1
                 };
             });
@@ -73,11 +77,53 @@
                             type: 'time',
                             time: {
                                 unit: 'day',
-                                tooltipFormat: 'MMM DD',
+                                tooltipFormat: 'MMM dd',
                                 displayFormats: {
-                                    day: 'MMM DD'
+                                    day: 'MMM dd'
                                 }
                             }
+                        }
+                    }
+                }
+            });
+
+            // Second Chart
+            const complaints = @json($complaints);
+
+            const inventoryCount = {};
+            complaints.forEach(complaint => {
+                const inventoryName = complaint.inventory_name;
+                if (!inventoryCount[inventoryName]) {
+                    inventoryCount[inventoryName] = 0;
+                }
+                inventoryCount[inventoryName]++;
+            });
+
+            const labels2 = Object.keys(inventoryCount);
+            const data2 = Object.values(inventoryCount);
+
+            const ctx2 = document.getElementById('complaintsChart').getContext('2d');
+            const chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: labels2,
+                    datasets: [{
+                        label: 'Number of Complaints',
+                        data: data2,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Complaints and Associated Inventories'
                         }
                     }
                 }
