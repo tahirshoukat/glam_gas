@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('products', [ProductController::class, 'index'])->name('products');
 
     Route::get('inventories', [InventoryController::class, 'index'])->name('inventories');
+    Route::post('inventories/upload', [InventoryController::class, 'uploadCsv'])->name('inventories.upload');
 
     Route::get('inventories/allocations', [AllocationController::class, 'index'])->name('inventories.allocations');
 
