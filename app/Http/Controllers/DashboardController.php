@@ -10,10 +10,11 @@ class DashboardController extends Controller
 {
     public function index(){
         // Fetch complaints with associated inventory details
-        $complaints = DB::table('complaints')
-            ->join('inventories', 'complaints.inventory_id', '=', 'inventories.id')
-            ->select('complaints.id as complaint_id', 'complaints.customer_name', 'complaints.created_at', 'inventories.name as inventory_name')
-            ->get();
+        // $complaints = DB::table('complaints')
+        //     ->join('inventories', 'complaints.inventory_id', '=', 'inventories.id')
+        //     ->select('complaints.id as complaint_id', 'complaints.customer_name', 'complaints.created_at', 'inventories.name as inventory_name')
+        //     ->get();
+        $complaints = Complaint::all();
 
         // Calculate commission per technician per day
         $commissions = DB::table('allocations')

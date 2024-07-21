@@ -36,8 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('complaints', [ComplaintController::class, 'index'])->name('complaints');
-    Route::get('complaints/{id}', [ComplaintController::class, 'details'])->name('complaints.view');
+    // Route::get('complaints', [ComplaintController::class, 'index'])->name('complaints');
+    // Route::get('complaints/{id}', [ComplaintController::class, 'details'])->name('complaints.view');
+
+    Route::get('/complaints', [ComplaintController::class, 'index'])->name('complaints');
+    Route::get('/complaints/create', [ComplaintController::class, 'create'])->name('complaints.create');
+    Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
+    Route::get('/complaints/{complaint}', [ComplaintController::class, 'show'])->name('complaints.view');
+    Route::post('/complaints/{complaint}/assign-technician', [ComplaintController::class, 'assignTechnician'])->name('complaints.assignTechnician');
 
     Route::get('products', [ProductController::class, 'index'])->name('products');
 

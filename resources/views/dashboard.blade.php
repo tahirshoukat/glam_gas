@@ -20,7 +20,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-4">Complaints and Associated Inventories</h3>
+                    <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-4">Complaints</h3>
                     <canvas id="complaintsChart"></canvas>
                 </div>
             </div>
@@ -31,10 +31,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Commission Data
             const commissionData = @json($commissionData);
 
+            // Extract and sort unique labels
             const labels = [...new Set(Object.values(commissionData).flatMap(data => Object.keys(data)))].sort();
 
+            // Generate random colors for each dataset
             function getRandomColor() {
                 const letters = '0123456789ABCDEF';
                 let color = '#';
@@ -44,6 +47,7 @@
                 return color;
             }
 
+            // Prepare datasets for the commission chart
             const datasets = Object.keys(commissionData).map(technicianId => {
                 return {
                     label: `Technician ${technicianId}`,
@@ -54,8 +58,9 @@
                 };
             });
 
+            // Initialize the commission chart
             const ctx = document.getElementById('commissionChart').getContext('2d');
-            const chart = new Chart(ctx, {
+            const commissionChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -87,23 +92,25 @@
                 }
             });
 
-            // Second Chart
+            // Second Chart for Complaints
             const complaints = @json($complaints);
 
-            const inventoryCount = {};
+            // Count complaints per product category
+            const productCount = {};
             complaints.forEach(complaint => {
-                const inventoryName = complaint.inventory_name;
-                if (!inventoryCount[inventoryName]) {
-                    inventoryCount[inventoryName] = 0;
+                const product = complaint.product;
+                if (!productCount[product]) {
+                    productCount[product] = 0;
                 }
-                inventoryCount[inventoryName]++;
+                productCount[product]++;
             });
 
-            const labels2 = Object.keys(inventoryCount);
-            const data2 = Object.values(inventoryCount);
+            const labels2 = Object.keys(productCount);
+            const data2 = Object.values(productCount);
 
+            // Initialize the complaints chart
             const ctx2 = document.getElementById('complaintsChart').getContext('2d');
-            const chart2 = new Chart(ctx2, {
+            const complaintsChart = new Chart(ctx2, {
                 type: 'bar',
                 data: {
                     labels: labels2,
@@ -123,7 +130,7 @@
                         },
                         title: {
                             display: true,
-                            text: 'Complaints and Associated Inventories'
+                            text: 'Complaints'
                         }
                     }
                 }

@@ -19,10 +19,16 @@ return new class extends Migration
             $table->string('contact1');
             $table->string('contact2')->nullable();
             $table->string('address');
-            $table->string('product_category');
-            $table->text('complaint_details');
-            $table->enum('status', ['active', 'closed', 'unresolved', 'in_progress']);
-            $table->timestamps();
+            $table->string('product');
+            $table->text('problem');
+            $table->string('warranty_status');
+            $table->string('purchased_from');
+            $table->string('cancel_reason')->nullable();
+            $table->string('model_photo');
+            $table->string('complaint_number')->unique();
+            $table->enum('status', ['pending', 'active', 'closed', 'unresolved', 'in_progress']);
+            $table->integer('technician_id')->nullable();
+            $table->timestamps(); 
         });
     }
 

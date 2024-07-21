@@ -14,8 +14,19 @@ class Complaint extends Model
         'contact1',
         'contact2',
         'address',
-        'product_category',
-        'complaint_details',
-        'status'
+        'problem',
+        'warranty_status',
+        'purchased_from',
+        'cancel_reason',
+        'model_photo',
+        'product',
+        'complaint_number',
+        'status',
+        'technician_id'
     ];
+
+    public function technician()
+    {
+        return $this->belongsTo(Technician::class, 'technician_id');
+    }
 }
