@@ -16,6 +16,11 @@
                         <button type="submit" class="mt-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50">Upload CSV</button>
                     </form>
 
+                    <!-- Add Inventory Button -->
+                    <div class="mb-4">
+                        <a href="{{ route('inventories.create') }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">Add Inventory</a>
+                    </div>
+
                     <!-- Search Form -->
                     <form method="GET" action="{{ route('inventories') }}" class="mb-4 flex">
                         <input type="text" name="search" value="{{ $search }}" class="border rounded-l-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Search items...">
